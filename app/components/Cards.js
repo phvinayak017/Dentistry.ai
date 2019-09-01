@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Image } from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import { StackNavigation } from 'react-navigation-stack'
 import Axios from 'axios'
+var moment = require('moment');
 
 export default class Cards extends Component {
     static navigationOptions = {
@@ -12,7 +13,8 @@ export default class Cards extends Component {
         super(props);
         this.state = {
             current: "https://images.dog.ceo/breeds/terrier-american/n02093428_8744.jpg",
-            likedImages: []
+            likedImages: [],
+            time: new Date()
         }
     }
 
@@ -28,11 +30,11 @@ export default class Cards extends Component {
                     current: url,
                 })
             })
-        console.log(this.state.current, this.state.likedImages)
     }
 
     handleLike = () => {
-        this.setState(state => ({ likedImages: [...state.likedImages, state.current] }))
+        this.setState(state => ({ likedImages: [...state.likedImages, { url: state.current, when: new Date() }] }))
+        // console.log(time)
         this.getNext()
     }
 
@@ -42,8 +44,7 @@ export default class Cards extends Component {
 
     handleShow = () => {
         this.props.navigation.navigate("second", {
-            itemId: 86,
-            otherParam: 'anything you want here',
+            likedImages: this.state.likedImages,
         })
     }
 
@@ -76,7 +77,6 @@ export default class Cards extends Component {
                                 title=''
                                 onPress={this.handleLike} />
                         </View>
-
                     </Card>
                 </View>
             </View>

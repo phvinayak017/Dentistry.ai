@@ -1,26 +1,38 @@
 import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet } from 'react-native'
 import { Card, Button } from 'react-native-elements'
+import { ScrollView } from 'react-native-gesture-handler';
+var moment = require('moment');
 
 export default class Doglist extends Component {
+    getDisplayDate = date => {
+        // current = new Date()
+        // diff = Math.floor((current - date) / 1000)
+        // if(diff<3600)
+        diff = moment(date).fromNow()
+        return diff
+    }
     render() {
         const { navigation } = this.props;
-        const itemId = navigation.getParam('itemId', 'NO-ID');
-        const otherParam = navigation.getParam('otherParam', 'some default value');
-
-        console.log(itemId, otherParam)
+        const likedDogs = navigation.getParam('likedImages', 'images');
         return (
             <View>
                 <Text style={styles.heading}>Liked List </Text>
-                <Card style={styles.cardStyle}>
-                    <View style={styles.detailWrapper} >
-                        <Image
-                            source={{ uri: "https://images.dog.ceo/breeds/terrier-american/n02093428_8744.jpg" }}
-                            style={{ width: '50%', height: 150 }}
-                        />
-                        <Text style={styles.text}> 00: mins Ago</Text>
-                    </View>
-                </Card>
+                <ScrollView>
+                    {likedDogs.map((dog, id) => {
+                        return (
+                            <Card key={id} style={styles.cardStyle}>
+                                <View style={styles.detailWrapper} >
+                                    <Image
+                                        source={{ uri: dog.url }}
+                                        style={{ width: '50%', height: 150 }}
+                                    />
+                                    <Text style={styles.text}> {this.getDisplayDate(dog.when)}</Text>
+                                </View>
+                            </Card>
+                        )
+                    })}
+                </ScrollView>
             </View>
         )
     }

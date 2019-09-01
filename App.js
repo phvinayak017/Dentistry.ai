@@ -8,7 +8,6 @@ import Doglist from './app/components/Doglist';
 const AppNavigator = createStackNavigator({
   first: { screen: Cards },
   second: { screen: Doglist },
-
 });
 
 export default createAppContainer(AppNavigator);
