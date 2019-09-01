@@ -16,6 +16,11 @@ export default class Cards extends Component {
         }
     }
 
+    componentDidMount() {
+        this.setState({
+            likedImages: [...this.state.likedImages, this.state.images]
+        })
+    }
     handleLike = () => {
         const url = "https://dog.ceo/api/breeds/image/random"
         Axios
@@ -23,9 +28,10 @@ export default class Cards extends Component {
             .then(({ data: { message: url } }) => {
                 this.setState({
                     images: url,
+                    likedImages: [...this.state.likedImages, url]
                 })
             })
-        console.log(this.state.images)
+        console.log(this.state.likedImages)
     }
 
 
@@ -35,10 +41,13 @@ export default class Cards extends Component {
             .get(url)
             .then(({ data: { message: url } }) => {
                 this.setState({
-                    images: url
+                    images: url,
+                    likedImages: [...this.state.likedImages, url]
                 })
             })
-        console.log(this.state.images)
+        this.setState((prevImage) => {
+            console.log(prevImage)
+        })
     }
 
     handleShow = () => {
