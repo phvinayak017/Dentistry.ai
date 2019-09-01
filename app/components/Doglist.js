@@ -5,6 +5,15 @@ import { ScrollView } from 'react-native-gesture-handler';
 var moment = require('moment');
 
 export default class Doglist extends Component {
+
+    static navigationOptions = {
+        title: 'My Favorites',
+        headerStyle: {
+            backgroundColor: '#536dfe',
+        },
+        headerTintColor: '#fff',
+    }
+
     getDisplayDate = date => {
         // current = new Date()
         // diff = Math.floor((current - date) / 1000)
@@ -25,7 +34,8 @@ export default class Doglist extends Component {
                                 <View style={styles.detailWrapper} >
                                     <Image
                                         source={{ uri: dog.url }}
-                                        style={{ width: '50%', height: 150 }}
+                                        resizeMode="cover"
+                                        style={{ width: "50%", height: 125 }}
                                     />
                                     <Text style={styles.text}> {this.getDisplayDate(dog.when)}</Text>
                                 </View>
@@ -41,19 +51,18 @@ export default class Doglist extends Component {
 
 const styles = StyleSheet.create({
     heading: {
-        marginLeft: '30%',
+        marginLeft: '33%',
         marginBottom: 10,
         marginTop: 20,
         fontSize: 24,
         alignItems: 'center',
         justifyContent: 'center',
-        // marginBottom: 10
+        color: "#536dfe"
     },
     detailWrapper: {
         alignItems: 'flex-start',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        // marginBottom: 10
     },
     cardStyle: {
         marginBottom: 10,
@@ -61,7 +70,8 @@ const styles = StyleSheet.create({
         width: 250
     },
     text: {
-        marginTop: 70,
+        marginTop: 50,
         marginRight: 30,
+        marginRight: 10,
     }
 }); <p></p>

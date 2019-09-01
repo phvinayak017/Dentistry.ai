@@ -6,8 +6,8 @@ import { createAppContainer } from 'react-navigation';
 import Doglist from './app/components/Doglist';
 
 const AppNavigator = createStackNavigator({
-  first: { screen: Cards },
-  second: { screen: Doglist },
+  Home: { screen: Cards },
+  List: { screen: Doglist },
 });
 
 export default createAppContainer(AppNavigator);

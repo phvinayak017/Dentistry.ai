@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, Image } from 'react-native'
 import { Card, Button } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { StackNavigation } from 'react-navigation-stack'
 import Axios from 'axios'
 var moment = require('moment');
 
 export default class Cards extends Component {
     static navigationOptions = {
-        title: 'First Screen'
+        title: 'Home',
+        headerStyle: {
+            backgroundColor: '#536dfe',
+        },
+        headerTintColor: '#fff',
     }
     constructor(props) {
         super(props);
@@ -43,9 +48,9 @@ export default class Cards extends Component {
     }
 
     handleShow = () => {
-        this.props.navigation.navigate("second", {
+        this.props.navigation.navigate("List", {
             likedImages: this.state.likedImages,
-        })
+        }, { title: 'My favorite' })
     }
 
     render() {
@@ -63,17 +68,23 @@ export default class Cards extends Component {
                         <View style={styles.detailWrapper}>
                             <Button
                                 raised
-                                icon={{ name: 'clear' }}
+                                type="outline"
+                                buttonStyle={{ height: 60, width: 60, borderRadius: 30 }}
+                                icon={{ name: 'clear', color: '#536dfe', size: 25 }}
                                 title=''
                                 onPress={this.handleDislike} />
                             <Button
                                 raised
-                                icon={{ name: 'favorite' }}
+                                type="outline"
+                                buttonStyle={{ height: 60, width: 60, borderRadius: 30 }}
+                                icon={{ name: 'favorite', color: '#536dfe', size: 25 }}
                                 title=''
                                 onPress={this.handleShow} />
                             <Button
                                 raised
-                                icon={{ name: 'done' }}
+                                type="outline"
+                                buttonStyle={{ height: 60, width: 60, borderRadius: 30 }}
+                                icon={{ name: 'done', color: '#536dfe', size: 25 }}
                                 title=''
                                 onPress={this.handleLike} />
                         </View>
@@ -87,12 +98,12 @@ export default class Cards extends Component {
 
 const styles = StyleSheet.create({
     heading: {
-        marginLeft: '30%',
+        marginLeft: '32%',
         marginTop: 20,
         fontSize: 24,
         alignItems: 'center',
         justifyContent: 'center',
-        // marginBottom: 10
+        color: "#536dfe"
     },
     container: {
         flex: 1,
@@ -107,7 +118,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        // marginBottom: 10
+
     },
     btnstyle: {
         flex: 1,
