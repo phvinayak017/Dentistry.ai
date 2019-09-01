@@ -19,7 +19,6 @@ export default class Cards extends Component {
         this.state = {
             current: "https://images.dog.ceo/breeds/terrier-american/n02093428_8744.jpg",
             likedImages: [],
-            time: new Date()
         }
     }
 
