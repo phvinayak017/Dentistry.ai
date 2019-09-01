@@ -11,43 +11,33 @@ export default class Cards extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            images: "https://images.dog.ceo/breeds/terrier-american/n02093428_8744.jpg",
+            current: "https://images.dog.ceo/breeds/terrier-american/n02093428_8744.jpg",
             likedImages: []
         }
     }
 
     componentDidMount() {
-        this.setState({
-            likedImages: [...this.state.likedImages, this.state.images]
-        })
     }
-    handleLike = () => {
+
+    getNext = () => {
         const url = "https://dog.ceo/api/breeds/image/random"
         Axios
             .get(url)
             .then(({ data: { message: url } }) => {
                 this.setState({
-                    images: url,
-                    likedImages: [...this.state.likedImages, url]
+                    current: url,
                 })
             })
-        console.log(this.state.likedImages)
+        console.log(this.state.current, this.state.likedImages)
     }
 
+    handleLike = () => {
+        this.setState(state => ({ likedImages: [...state.likedImages, state.current] }))
+        this.getNext()
+    }
 
     handleDislike = () => {
-        const url = "https://dog.ceo/api/breeds/image/random"
-        Axios
-            .get(url)
-            .then(({ data: { message: url } }) => {
-                this.setState({
-                    images: url,
-                    likedImages: [...this.state.likedImages, url]
-                })
-            })
-        this.setState((prevImage) => {
-            console.log(prevImage)
-        })
+        this.getNext()
     }
 
     handleShow = () => {
@@ -65,7 +55,7 @@ export default class Cards extends Component {
                     <Card style={styles.cardStyle}>
                         <View style={{ height: 300, width: 250 }}>
                             <Image
-                                source={{ uri: this.state.images }}
+                                source={{ uri: this.state.current }}
                                 style={{ width: '100%', height: 250 }}
                             />
                         </View>
